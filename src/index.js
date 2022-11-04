@@ -1,10 +1,15 @@
 import './style.css';
 
 const todo = [
+  { description: 'Go to 4th Block', isCompleted: false, index: 4 },
   { description: 'Go Bazar', isCompleted: false, index: 1 },
   { description: 'Go to the gym', isCompleted: false, index: 2 },
   { description: 'Go to the Field', isCompleted: false, index: 3 },
 ];
+
+todo.sort((a, b) => {
+  return a.index - b.index;
+});
 
 const mainContainer = document.querySelector('#todo-container');
 const populateTodo = (todo) => {
