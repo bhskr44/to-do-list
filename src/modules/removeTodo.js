@@ -1,5 +1,3 @@
-import { forEach } from 'lodash';
-
 const removeTodo = (index) => {
   //   console.log('id: ', id);
   let todoList = JSON.parse(localStorage.getItem('todo'));
@@ -7,7 +5,7 @@ const removeTodo = (index) => {
   let i = 1;
   todoList.forEach((todo) => {
     todo.index = i;
-    i++;
+    i += 1;
   });
   localStorage.setItem('todo', JSON.stringify(todoList));
   window.location.reload();
