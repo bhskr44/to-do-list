@@ -1,5 +1,6 @@
 import removeTodo from './removeTodo.js';
 import editTodo from './editTodo.js';
+import complete from './complteTask.js';
 
 const mainContainer = document.querySelector('#todo-container');
 const populateTodo = (todo) => {
@@ -53,6 +54,21 @@ const populateTodo = (todo) => {
     e.preventDefault();
     editTodo(input.value, todo.index);
   });
+
+  todoCheck.onchange = () => {
+    if (todoCheck.checked === true) {
+      complete(todo.index, true);
+      p.style.textDecoration = 'line-through';
+    } else {
+      complete(todo.index, false);
+      p.style.textDecoration = 'none';
+    }
+  };
+
+  if (todo.isCompleted) {
+    todoCheck.checked = true;
+    p.style.textDecoration = 'line-through';
+  }
 
   mainContainer.appendChild(li);
 };
