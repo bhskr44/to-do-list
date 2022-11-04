@@ -7,9 +7,7 @@ const todo = [
   { description: 'Go to the Field', isCompleted: false, index: 3 },
 ];
 
-todo.sort((a, b) => {
-  return a.index - b.index;
-});
+todo.sort((a, b) => a.index - b.index);
 
 const mainContainer = document.querySelector('#todo-container');
 const populateTodo = (todo) => {
