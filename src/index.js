@@ -1,58 +1,33 @@
 import './style.css';
-
-const todo = [
-  { description: 'Go Bazar', isCompleted: false, index: 1 },
-  { description: 'Go to the gym', isCompleted: false, index: 2 },
-  { description: 'Go to the Field', isCompleted: false, index: 3 },
-];
+import Todo from './modules/Todo.js';
+import saveTodo from './modules/saveTodo.js';
+import removeTodo from './modules/removeTodo.js';
+import populateTodo from './modules/populateTodo.js';
 
 const mainContainer = document.querySelector('#todo-container');
-const populateTodo = (todo) => {
-  const li = document.createElement('li');
-  li.className = 'main-item li';
+let populateAllTodo = () => {
+  mainContainer.innerHTML = '';
+  let todoList = JSON.parse(localStorage.getItem('todo'));
 
-  const todoCheck = document.createElement('input');
-  todoCheck.type = 'checkbox';
-  todoCheck.className = 'checkbox';
+  todoList.sort((a, b) => a.index - b.index);
 
-  li.appendChild(todoCheck);
-
-  const p = document.createElement('p');
-  p.textContent = todo.description;
-  p.className = 'todo-p';
-  li.appendChild(p);
-
-  const miniForm = document.createElement('form');
-  miniForm.classList = 'edit-me hide';
-
-  const input = document.createElement('input');
-  input.type = 'text';
-  input.value = todo.description;
-  input.classList = 'hide';
-  miniForm.appendChild(input);
-  li.appendChild(miniForm);
-
-  const editIcon = document.createElement('span');
-  editIcon.classList = 'material-symbols-outlined more icon';
-  editIcon.textContent = 'edit';
-  li.appendChild(editIcon);
-
-  editIcon.addEventListener('click', () => {
-    li.classList.add('edit-background');
-    input.classList.add('edit-background');
-    input.classList.remove('hide');
-    p.classList.add('hide');
-    miniForm.classList.remove('hide');
+  todoList.forEach((todo) => {
+    populateTodo(todo);
   });
-
-  const deleteIcon = document.createElement('span');
-  deleteIcon.classList = 'material-symbols-outlined icon';
-  deleteIcon.textContent = 'delete';
-  li.appendChild(deleteIcon);
-
-  mainContainer.appendChild(li);
 };
 
-todo.forEach((item) => {
-  populateTodo(item);
+const todoItem = document.querySelector('#todo-item');
+todoItem.addEventListener('change', (e) => {
+  var todoList = [];
+  if (localStorage.getItem('todo')) {
+    todoList = JSON.parse(localStorage.getItem('todo'));
+  }
+  const todo = new Todo(todoItem.value, false, todoList.length);
+  saveTodo(todo);
+  populateAllTodo();
+  todoItem.value = '';
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  populateAllTodo();
 });
