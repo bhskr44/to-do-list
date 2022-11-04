@@ -12,7 +12,7 @@
 
 ## Live Demo (if available)
 
-[Live Demo Link](https://bhskr44.github.io/to-do-list)
+[Live Demo Link](https://bhskr44.github.io/to-do-list/dist)
 
 ## Getting Started
 
