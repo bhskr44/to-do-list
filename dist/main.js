@@ -115,67 +115,7 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n/* harmony import */ var _modules_Todo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/Todo.js */ \"./src/modules/Todo.js\");\n/* harmony import */ var _modules_saveTodo_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/saveTodo.js */ \"./src/modules/saveTodo.js\");\n/* harmony import */ var _modules_populateTodo_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/populateTodo.js */ \"./src/modules/populateTodo.js\");\n\n\n\n\n\nconst mainContainer = document.querySelector('#todo-container');\nconst clearCompleted = document.querySelector('.clear');\n\nconst populateAllTodo = () => {\n  mainContainer.innerHTML = '';\n  const todoList = JSON.parse(localStorage.getItem('todo'));\n\n  todoList.sort((a, b) => a.index - b.index);\n\n  todoList.forEach((todo) => {\n    (0,_modules_populateTodo_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(todo);\n  });\n};\n\nconst todoItem = document.querySelector('#todo-item');\ntodoItem.addEventListener('change', () => {\n  let todoList = [];\n  if (localStorage.getItem('todo')) {\n    todoList = JSON.parse(localStorage.getItem('todo'));\n  }\n  const todo = new _modules_Todo_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"](todoItem.value, false, todoList.length);\n  (0,_modules_saveTodo_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(todo);\n  populateAllTodo();\n  todoItem.value = '';\n});\n\ndocument.addEventListener('DOMContentLoaded', () => {\n  populateAllTodo();\n});\n\nclearCompleted.addEventListener('click', () => {\n  let todoList = JSON.parse(localStorage.getItem('todo'));\n\n  todoList = todoList.filter((todo) => todo.isCompleted === false);\n  let i = 1;\n  todoList.forEach((todo) => {\n    todo.index = i;\n    i += 1;\n  });\n  localStorage.setItem('todo', JSON.stringify(todoList));\n  window.location.reload();\n});\n\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
-
-/***/ }),
-
-/***/ "./src/modules/Todo.js":
-/*!*****************************!*\
-  !*** ./src/modules/Todo.js ***!
-  \*****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (/* binding */ Todo)\n/* harmony export */ });\nclass Todo {\n  constructor(description, isCompleted, index) {\n    this.description = description;\n    this.isCompleted = isCompleted;\n    this.index = index;\n  }\n}\n\n\n//# sourceURL=webpack://to-do-list/./src/modules/Todo.js?");
-
-/***/ }),
-
-/***/ "./src/modules/complteTask.js":
-/*!************************************!*\
-  !*** ./src/modules/complteTask.js ***!
-  \************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst complete = (index, value) => {\n  const todoList = JSON.parse(localStorage.getItem('todo'));\n  todoList.forEach((todo) => {\n    if (todo.index === index) {\n      todo.isCompleted = value;\n    }\n  });\n  localStorage.setItem('todo', JSON.stringify(todoList));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (complete);\n\n\n//# sourceURL=webpack://to-do-list/./src/modules/complteTask.js?");
-
-/***/ }),
-
-/***/ "./src/modules/editTodo.js":
-/*!*********************************!*\
-  !*** ./src/modules/editTodo.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst editTodo = (description, index) => {\n  const todoList = JSON.parse(localStorage.getItem('todo'));\n  todoList.forEach((todo) => {\n    if (todo.index === index) {\n      todo.description = description;\n    }\n  });\n  localStorage.setItem('todo', JSON.stringify(todoList));\n  window.location.reload();\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (editTodo);\n\n\n//# sourceURL=webpack://to-do-list/./src/modules/editTodo.js?");
-
-/***/ }),
-
-/***/ "./src/modules/populateTodo.js":
-/*!*************************************!*\
-  !*** ./src/modules/populateTodo.js ***!
-  \*************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _removeTodo_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./removeTodo.js */ \"./src/modules/removeTodo.js\");\n/* harmony import */ var _editTodo_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./editTodo.js */ \"./src/modules/editTodo.js\");\n/* harmony import */ var _complteTask_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./complteTask.js */ \"./src/modules/complteTask.js\");\n\n\n\n\nconst mainContainer = document.querySelector('#todo-container');\nconst populateTodo = (todo) => {\n  const li = document.createElement('li');\n  li.className = 'main-item li';\n\n  const todoCheck = document.createElement('input');\n  todoCheck.type = 'checkbox';\n  todoCheck.className = 'checkbox';\n\n  li.appendChild(todoCheck);\n\n  const p = document.createElement('p');\n  p.textContent = todo.description;\n  p.className = 'todo-p';\n  li.appendChild(p);\n\n  const miniForm = document.createElement('form');\n  miniForm.classList = 'edit-me hide';\n\n  const input = document.createElement('input');\n  input.type = 'text';\n  input.value = todo.description;\n  input.classList = 'hide';\n  miniForm.appendChild(input);\n  li.appendChild(miniForm);\n\n  const editIcon = document.createElement('span');\n  editIcon.classList = 'material-symbols-outlined more icon';\n  editIcon.textContent = 'edit';\n  li.appendChild(editIcon);\n\n  editIcon.addEventListener('click', () => {\n    li.classList.add('edit-background');\n    input.classList.add('edit-background');\n    input.classList.remove('hide');\n    p.classList.add('hide');\n    miniForm.classList.remove('hide');\n  });\n\n  const deleteIcon = document.createElement('span');\n  deleteIcon.classList = 'material-symbols-outlined icon';\n  deleteIcon.textContent = 'delete';\n  li.appendChild(deleteIcon);\n\n  deleteIcon.addEventListener('click', () => {\n    (0,_removeTodo_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(todo.index);\n  });\n\n  miniForm.addEventListener('change', (e) => {\n    e.preventDefault();\n    (0,_editTodo_js__WEBPACK_IMPORTED_MODULE_1__[\"default\"])(input.value, todo.index);\n  });\n\n  todoCheck.onchange = () => {\n    if (todoCheck.checked === true) {\n      (0,_complteTask_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(todo.index, true);\n      p.style.textDecoration = 'line-through';\n    } else {\n      (0,_complteTask_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"])(todo.index, false);\n      p.style.textDecoration = 'none';\n    }\n  };\n\n  if (todo.isCompleted) {\n    todoCheck.checked = true;\n    p.style.textDecoration = 'line-through';\n  }\n\n  mainContainer.appendChild(li);\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (populateTodo);\n\n\n//# sourceURL=webpack://to-do-list/./src/modules/populateTodo.js?");
-
-/***/ }),
-
-/***/ "./src/modules/removeTodo.js":
-/*!***********************************!*\
-  !*** ./src/modules/removeTodo.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst removeTodo = (index) => {\n  //   console.log('id: ', id);\n  let todoList = JSON.parse(localStorage.getItem('todo'));\n  todoList = todoList.filter((todo) => todo.index !== Number(index));\n  let i = 1;\n  todoList.forEach((todo) => {\n    todo.index = i;\n    i += 1;\n  });\n  localStorage.setItem('todo', JSON.stringify(todoList));\n  window.location.reload();\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (removeTodo);\n\n\n//# sourceURL=webpack://to-do-list/./src/modules/removeTodo.js?");
-
-/***/ }),
-
-/***/ "./src/modules/saveTodo.js":
-/*!*********************************!*\
-  !*** ./src/modules/saveTodo.js ***!
-  \*********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst saveTodo = (newTodo) => {\n  let todoList = [];\n  if (localStorage.getItem('todo')) {\n    todoList = JSON.parse(localStorage.getItem('todo'));\n  }\n  todoList.push(newTodo);\n  localStorage.setItem('todo', JSON.stringify(todoList));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (saveTodo);\n\n\n//# sourceURL=webpack://to-do-list/./src/modules/saveTodo.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.css */ \"./src/style.css\");\n\r\n\r\n\r\ntodo.sort((a, b) => a.index - b.index);\r\n\r\nconst mainContainer = document.querySelector('#todo-container');\r\nconst clearCompleted = document.querySelector('.clear');\r\n\r\nconst populateAllTodo = () => {\r\n  mainContainer.innerHTML = '';\r\n  const todoList = JSON.parse(localStorage.getItem('todo'));\r\n\r\n  todoList.sort((a, b) => a.index - b.index);\r\n\r\n  todoList.forEach((todo) => {\r\n    populateTodo(todo);\r\n  });\r\n};\r\n\r\nconst todoItem = document.querySelector('#todo-item');\r\ntodoItem.addEventListener('change', () => {\r\n  let todoList = [];\r\n  if (localStorage.getItem('todo')) {\r\n    todoList = JSON.parse(localStorage.getItem('todo'));\r\n  }\r\n  const todo = new Todo(todoItem.value, false, todoList.length);\r\n  saveTodo(todo);\r\n  populateAllTodo();\r\n  todoItem.value = '';\r\n});\r\n\r\ndocument.addEventListener('DOMContentLoaded', () => {\r\n  populateAllTodo();\r\n});\r\n\r\nclearCompleted.addEventListener('click', () => {\r\n  let todoList = JSON.parse(localStorage.getItem('todo'));\r\n\r\n  todoList = todoList.filter((todo) => todo.isCompleted === false);\r\n  let i = 1;\r\n  todoList.forEach((todo) => {\r\n    todo.index = i;\r\n    i += 1;\r\n  });\r\n  localStorage.setItem('todo', JSON.stringify(todoList));\r\n  window.location.reload();\r\n});\r\n\n\n//# sourceURL=webpack://to-do-list/./src/index.js?");
 
 /***/ })
 
