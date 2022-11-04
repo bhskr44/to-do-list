@@ -37,8 +37,6 @@ clearCompleted.addEventListener('click', () => {
   let todoList = JSON.parse(localStorage.getItem('todo'));
 
   todoList = todoList.filter((todo) => todo.isCompleted === false);
-  console.log('todoList', todoList);
-
   let i = 1;
   todoList.forEach((todo) => {
     todo.index = i;
