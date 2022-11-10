@@ -1,13 +1,9 @@
-import getLocalstorage from './LocalStorageCopy.js';
+import addTodo from './addTodo.js';
+import saveTodoList from './saveTodoList.js';
 
 const saveTodo = (newTodo) => {
-  let todoList = [];
-  if (getLocalstorage()) {
-    todoList = JSON.parse(localStorage.getItem('todo'));
-  }
-  todoList.push(newTodo);
-  localStorage.setItem('todo', JSON.stringify(todoList));
-  // getLocalstorage();
+  const todoList = addTodo(newTodo);
+  saveTodoList(todoList);
 };
 
 export default saveTodo;
