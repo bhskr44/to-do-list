@@ -1,7 +1,10 @@
 import './style.css';
 
+import populateTodo from './modules/populateTodo.js';
+import saveTodo from './modules/saveTodo.js';
+import Todo from './modules/Todo.js';
 
-todo.sort((a, b) => a.index - b.index);
+// todo.sort((a, b) => a.index - b.index);
 
 const mainContainer = document.querySelector('#todo-container');
 const clearCompleted = document.querySelector('.clear');
